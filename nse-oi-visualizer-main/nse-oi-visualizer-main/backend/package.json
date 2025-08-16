@@ -1,0 +1,20 @@
+{
+  "name": "chakramarkets-backend",
+  "version": "1.0.0",
+  "description": "ChakraMarkets - Options Trading Analytics Platform",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.11.0",
+    "express": "^4.18.2",
+    "gaussian": "^1.3.0",
+    "nodemon": "^3.0.2",
+    "user-agents": "^1.1.63"
+  }
+}
