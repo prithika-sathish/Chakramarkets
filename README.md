@@ -1,47 +1,119 @@
-## ChakraMarkets - Options Trading Analytics Platform
+# ChakraMarkets
 
-A modern React application inspired by [Sensibull](https://www.sensibull.com/), that visualizes real-time Open Interest data and Option Strategy Profit and Loss for Indian Benchmark Indices and F&O stocks. The app fetches data from NSE API to show OI bar plots and Strategy Payoff line plots. The data is auto-updated at 3-minute intervals. Frontend is built with React, Material UI, Redux and D3. Backend is built with NodeJS.
+A modern options analytics and portfolio tool for Indian markets. Think of it as a lightweight, DIY take on Sensibull: clean UI, fast charts, and practical tools for decisions—not noise.
+
+---
 
 ## Demo
-![Alt text](https://media.giphy.com/media/mEXnQLhtoUUWI3ahwL/giphy.gif)
 
-## Features
-1. Fetches Real-time Open Interest data of Indian Benchmark Indices (NIFTY, BANKNIFTY, FINNIFTY and MIDCPNIFTY) and F&O stocks listed on NSE (185 stocks).
-2. Shows Change in Open Interest and Total Open Interest.
-3. Has a multi expiry selector to see combined Open Interest. With 4 (2 weekly, 2 monthly) selectable expiries for indices and 2 (2 monthly) selectable expiries for stocks.
-4. Has a Strike range selector to adjust the no. of strikes to be shown.
-5. Shows Option Strategy Payoff (P&L) at a target date as well as the expiry date for the selected underlying (maximum 10 legs).
-6. Uses Black-76 model to calculate IVs for each strike, and shows OTM option IV for both call and put.
-7. All IVs are calculated based on a synthetic (implied) futures price, computed with put-call parity formula based on the ATM option for each expiry.
-8. Auto-updates data, using a web worker, precisely at times when the minutes are divisible by 3 (ex: 9:30, 9:33, 9:36,...,9:57, 10:00 etc).
-9. Caches data with RTK Query for a maximum of 3 minutes.
-10. Charts have tooltips.
-11. Local storage persistence of the selected underlying.
+![ChakraMarkets Demo](https://media.giphy.com/media/mEXnQLhtoUUWI3ahwL/giphy.gif)
 
-## How to run it locally
-1. Clone the repository.
-2. cd into backend directory and run `npm install` to install dependencies.
-3. Run 'npm run dev' to start the proxy server.
-4. cd into frontend directory and run `npm install` to install dependencies.
-5. Run 'npm run dev' to start the frontend app.
-6. Open http://localhost:5173/ in your browser.
-7. You are good to go.
+---
 
-## To be done
-1. Improved UI/UX.
-2. Implement Error Boundaries and show appropriate error messages.
-3. Add strategy presets.
-4. FII and DII data visualization.
+## What it does
 
-## Note
-1. IV calculation and Option price calculation Black-76/Generalized-Black-Scholes code is sourced from [dedwards25/Python_Option_Pricing](https://github.com/dedwards25/Python_Option_Pricing)
-2. Minor differences in IVs and as a result in Option Payoffs as compared to Sensibull might be down to the fact that all the IVs are being calculated on synthetic futures prices, whereas Sensibull uses actual futures prices where available for monthly expiries. Another reason might be due to variations in time to expiry calculations.
+* **Real‑time OI visuals** for NIFTY, BANKNIFTY, FINNIFTY, MIDCPNIFTY and NSE F\&O stocks.
+* **Change in OI vs Total OI** side‑by‑side so you spot shifts, not just levels.
+* **Multi‑expiry view** (indices: 2 weekly + 2 monthly; stocks: 2 monthly).
+* **Strike range control** to focus on relevant strikes.
+* **Strategy payoff** for up to **10 legs**, at target date and at expiry.
+* **IV estimates** per strike using a Black‑style model (OTM calls and puts shown).
+* **Synthetic futures** price via put‑call parity for consistent IVs across expiries.
+* **Auto‑refresh every 3 minutes** (e.g., 09:30, 09:33, …) via a Web Worker.
+* **RTK Query cache** (\~3 minutes) and **local storage** for last‑used underlying.
 
-## References
-1. https://www.sensibull.com/ app.
-2. https://sensibull.freshdesk.com/support/solutions/folders/43000300252 Sensibull explains the Math behind Option Pricing here.
-3. https://2019.wattenberger.com/blog/react-and-d3 this is an insightful blog on how to use D3 with React, while keeping things Reacty.
-4. https://www.nseindia.com/ data source.
+---
 
-## Site link
-## https://chakramarkets.pages.dev/
+## New: Portfolio Manager + Priority Alerts
+
+**Why**: You need one place to track positions, risk, and what deserves your attention first.
+
+**What you get**
+
+* **Positions**: Add trades (options, futures, cash) with size, price, and expiry.
+* **Live P\&L**: Mark‑to‑market using the same price/IV pipeline as analytics.
+* **Greeks**: Per‑leg and aggregated Delta/Gamma/Vega/Theta (where data allows).
+* **Risk views**: Payoff curve, exposure by expiry, and concentration by symbol.
+* **Tagging**: Group by strategy (e.g., Iron Condor, Covered Call) for quick filters.
+
+**Priority‑based alerts**
+
+* **Levels**: `Critical` (act now), `High` (check soon), `Normal` (monitor), `Low` (FYI).
+* **Triggers** (configurable thresholds):
+
+  * Underlying move vs entry (%, ATR, or absolute points)
+  * IV spike/dive vs 20‑day baseline
+  * OI buildup/long‑short shifts near your strikes
+  * Time decay milestones (e.g., T‑7, T‑3)
+  * Breach of payoff breakeven or risk cap
+* **Channels**: In‑app toasts, badge counts, and optional email/webhook.
+* **Noise control**: Cooldowns per rule and daily alert cap.
+
+> Quick start: Defaults are conservative. Edit thresholds in **Settings → Alerts** to match your risk tolerance.
+
+
+## Data & math 
+
+* **Data source**: NSE endpoints proxied through the backend. Avoids CORS issues and keeps keys/timing server‑side.
+* **IV model**: A Black‑style options model. We estimate IV from option prices; per expiry we use a synthetic futures price from put‑call parity so calls/puts align.
+* **Why results may differ from vendors**: Some vendors use actual listed futures for monthlies and slightly different time‑to‑expiry conventions. Expect small IV/PNL deltas.
+
+Attribution: the core Black/Black‑Scholes style logic was adapted and simplified from open‑source references; the implementation here is tailored for JS and this app’s data flow.
+
+---
+
+## Setup
+
+1. **Clone the repo**
+2. **Backend**
+
+   ```bash
+   cd backend
+   npm install
+   npm run dev
+   ```
+3. **Frontend**
+
+   ```bash
+   cd ../frontend
+   npm install
+   npm run dev
+   ```
+4. Open `http://localhost:5173`.
+
+> The backend acts as a thin proxy to NSE. If you rate‑limit yourself, slow down the refresh or add simple caching.
+
+---
+
+## Configuration
+
+Create a `.env` in **backend** for proxy and rate controls:
+
+```env
+PORT=5050
+REFRESH_SEC=180     # 3‑minute cadence
+CACHE_TTL_SEC=180   # RTK Query pairs with this client‑side
+```
+
+Optionally add other providers (e.g., Alpha Vantage for equities or fallback quotes) and wire them behind the same interface.
+
+---
+
+## Usage
+
+* Pick an **underlying** → choose **expiries** → set **strike range**.
+* Toggle **Change OI / Total OI**.
+* Build a strategy (max 10 legs) → see payoff now vs expiry.
+* In **Portfolio**, add positions and set **alert rules**. The alert badge reflects the highest current priority.
+
+
+
+---
+
+## Notes
+
+* For education/research. Not investment advice.
+* NSE site and APIs may throttle or change. Keep your refresh modest.
+* Market hours/holidays affect live data.
+
+
