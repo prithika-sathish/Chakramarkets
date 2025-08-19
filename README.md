@@ -3,8 +3,7 @@
 A modern React application inspired by [Sensibull](https://www.sensibull.com/), that visualizes real-time Open Interest data and Option Strategy Profit and Loss for Indian Benchmark Indices and F&O stocks. The app fetches data from NSE API to show OI bar plots and Strategy Payoff line plots. The data is auto-updated at 3-minute intervals. Frontend is built with React, Material UI, Redux and D3. Backend is built with NodeJS.
 
 ## Demo
-![Usage Demo](frontend/demo/nse-oi-visualizer-demo.gif)
-
+https://giphy.com/gifs/mEXnQLhtoUUWI3ahwL
 ## Features
 1. Fetches Real-time Open Interest data of Indian Benchmark Indices (NIFTY, BANKNIFTY, FINNIFTY and MIDCPNIFTY) and F&O stocks listed on NSE (185 stocks).
 2. Shows Change in Open Interest and Total Open Interest.
