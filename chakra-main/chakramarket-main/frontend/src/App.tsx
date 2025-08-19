@@ -1,6 +1,7 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import Layout from './components/Layout';
 import Welcome from './components/Welcome';
+import PortfolioManager from './components/PortfolioManager';
 import OpenInterest from './components/OpenInterest';
 import StrategyBuilder from "./components/StrategyBuilder";
 import CustomAlerts from "./components/CustomAlerts";
@@ -14,6 +15,7 @@ function App() {
       <Routes>
         <Route path="/*" element={<Layout />}>
           <Route index element={<Welcome />} />
+          <Route path="portfolio-manager" element={<PortfolioManager />} />
           <Route path="position-tracker" element={<OpenInterest />} />
           <Route path="trade-planner" element={<StrategyBuilder />} />
           <Route path="custom-alerts" element={<CustomAlerts />} />

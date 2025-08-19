@@ -1,7 +1,9 @@
 import { configureStore, type Middleware } from "@reduxjs/toolkit";
 import themeReducer, { setThemeMode } from "../features/theme/themeSlice";
 import selectedReducer, { setUnderlying } from "../features/selected/selectedSlice";
+import portfolioReducer from "../features/portfolio/portfolioSlice";
 import { openInterestApi } from "../app/services/openInterest";
+import { portfolioApi } from "../app/services/portfolio";
 import identifiers, { type Identifier as Underlying } from "../identifiers";
 
 const localStorageMiddleware: Middleware = () => (next) => (action) => {
@@ -24,9 +26,15 @@ const store = configureStore({
   reducer: {
     theme: themeReducer,
     selected: selectedReducer,
+    portfolio: portfolioReducer,
     [openInterestApi.reducerPath]: openInterestApi.reducer,
+    [portfolioApi.reducerPath]: portfolioApi.reducer,
   },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(openInterestApi.middleware, localStorageMiddleware),
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(
+    openInterestApi.middleware,
+    portfolioApi.middleware,
+    localStorageMiddleware
+  ),
 });
 
 const themeMode = localStorage.getItem("themeMode");

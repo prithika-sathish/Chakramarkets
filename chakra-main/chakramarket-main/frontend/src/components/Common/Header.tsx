@@ -56,25 +56,29 @@ const Header = () => {
     setValue(newValue);
 
     if (newValue === 0) {
-      navigate('/');
+      navigate('/portfolio-manager');
     } else if (newValue === 1) {
-      navigate('/position-tracker');
+      navigate('/');
     } else if (newValue === 2) {
-      navigate('/trade-planner');
+      navigate('/position-tracker');
     } else if (newValue === 3) {
+      navigate('/trade-planner');
+    } else if (newValue === 4) {
       navigate('/custom-alerts');
     };
   };
 
   useLayoutEffect(() => {
-    if (path === '/') {
+    if (path === '/portfolio-manager') {
       setValue(0);
-    } else if (path === '/position-tracker') {
+    } else if (path === '/') {
       setValue(1);
-    } else if (path === '/trade-planner') {
+    } else if (path === '/position-tracker') {
       setValue(2);
-    } else if (path === '/custom-alerts') {
+    } else if (path === '/trade-planner') {
       setValue(3);
+    } else if (path === '/custom-alerts') {
+      setValue(4);
     };
   }, [path]);
 
@@ -101,6 +105,17 @@ const Header = () => {
         {isLargeScreen && (
           <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
             <Tabs value={value} onChange={handleChange} sx={{ minHeight: "48px" }}>
+              <Tab 
+                disableRipple 
+                label="Portfolio Manager" 
+                sx={{ 
+                  textTransform: "none", 
+                  py: 1.5,
+                  px: 3,
+                  fontSize: "14px",
+                  fontWeight: 500
+                }} 
+              />
               <Tab 
                 disableRipple 
                 label="Welcome" 
@@ -200,6 +215,17 @@ const Header = () => {
               sx={{ mt: 2 }}
               TabIndicatorProps={{ sx: { left: 0, width: "3px" } }}
             >
+              <Tab 
+                disableRipple 
+                label="Portfolio Manager" 
+                sx={{ 
+                  textTransform: "none", 
+                  py: 2,
+                  px: 3,
+                  fontSize: "14px",
+                  fontWeight: 500
+                }} 
+              />
               <Tab 
                 disableRipple 
                 label="Welcome" 

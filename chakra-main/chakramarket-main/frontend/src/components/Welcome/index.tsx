@@ -9,11 +9,18 @@ import DownloadIcon from '@mui/icons-material/Download';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 
 const Welcome = () => {
   const navigate = useNavigate();
 
   const capabilities = [
+    {
+      icon: <AccountBalanceWalletIcon sx={{ fontSize: 40, color: 'success.main' }} />,
+      title: 'Portfolio Manager',
+      description: 'Track, analyze, and optimize your investment portfolio with real-time data and AI-powered recommendations.',
+      color: 'success.main'
+    },
     {
       icon: <TrendingUpIcon sx={{ fontSize: 40, color: 'primary.main' }} />,
       title: 'Market Positions Viewer',
@@ -21,10 +28,10 @@ const Welcome = () => {
       color: 'primary.main'
     },
     {
-      icon: <AnalyticsIcon sx={{ fontSize: 40, color: 'success.main' }} />,
+      icon: <AnalyticsIcon sx={{ fontSize: 40, color: 'info.main' }} />,
       title: 'Trade Planner',
       description: 'Simulate and test option strategies before committing real money.',
-      color: 'success.main'
+      color: 'info.main'
     },
     {
       icon: <NotificationsIcon sx={{ fontSize: 40, color: 'warning.main' }} />,
@@ -33,48 +40,47 @@ const Welcome = () => {
       color: 'warning.main'
     },
     {
-      icon: <PsychologyIcon sx={{ fontSize: 40, color: 'info.main' }} />,
+      icon: <PsychologyIcon sx={{ fontSize: 40, color: 'secondary.main' }} />,
       title: 'Market Sentiment Insights',
       description: 'Instantly see if the market is leaning bullish, bearish, or neutral.',
-      color: 'info.main'
-    },
-    {
-      icon: <DarkModeIcon sx={{ fontSize: 40, color: 'secondary.main' }} />,
-      title: 'Dark / Light Mode',
-      description: 'Switch between themes for a comfortable experience.',
       color: 'secondary.main'
     },
     {
-      icon: <DownloadIcon sx={{ fontSize: 40, color: 'error.main' }} />,
-      title: 'Export Data',
-      description: 'Download insights to Excel/CSV for deeper analysis.',
-      color: 'error.main'
+      icon: <DarkModeIcon sx={{ fontSize: 40, color: 'text.secondary' }} />,
+      title: 'Dark / Light Mode',
+      description: 'Switch between themes for a comfortable experience.',
+      color: 'text.secondary'
     }
   ];
 
   const quickStartSteps = [
     {
       step: '1',
-      title: 'Choose Your Index',
-      description: 'Start by selecting NIFTY, BANKNIFTY, FINNIFTY, or MIDCPNIFTY.'
+      title: 'Build Your Portfolio',
+      description: 'Start by adding your stocks and options to the Portfolio Manager to track performance.'
     },
     {
       step: '2',
+      title: 'Choose Your Index',
+      description: 'Select NIFTY, BANKNIFTY, FINNIFTY, or MIDCPNIFTY for market analysis.'
+    },
+    {
+      step: '3',
       title: 'Pick an Expiry Date',
       description: 'Use the expiry dropdown to view contracts for weekly or monthly expiries.'
     },
     {
-      step: '3',
+      step: '4',
       title: 'Set Your Strike Range',
       description: 'Adjust how many strike prices above and below ATM you want to analyze.'
     },
     {
-      step: '4',
+      step: '5',
       title: 'Read Market Sentiment',
       description: 'View the automatic sentiment card to understand overall trends.'
     },
     {
-      step: '5',
+      step: '6',
       title: 'Plan Your Trade',
       description: 'Open the Trade Planner to test combinations of options, calculate risk, and fine-tune your strategy.'
     }
@@ -111,7 +117,7 @@ const Welcome = () => {
           variant="contained"
           size="large"
           startIcon={<PlayArrowIcon />}
-          onClick={() => navigate('/position-tracker')}
+          onClick={() => navigate('/portfolio-manager')}
           sx={{ 
             px: 4, 
             py: 1.5, 
@@ -267,7 +273,7 @@ const Welcome = () => {
             variant="contained"
             size="large"
             endIcon={<ArrowForwardIcon />}
-            onClick={() => navigate('/position-tracker')}
+            onClick={() => navigate('/portfolio-manager')}
             sx={{ 
               px: 4, 
               py: 1.5, 
@@ -276,7 +282,7 @@ const Welcome = () => {
               boxShadow: 3
             }}
           >
-            Explore Position Tracker
+            Start Managing Portfolio
           </Button>
         </Paper>
       </Box>
